@@ -11,6 +11,7 @@ interface EventCardProps {
   event: Event;
   onEdit: (event: Event) => void;
   onDelete: (id: string) => void;
+  inDialog?: boolean;
 }
 
 const MoodIcon = ({ mood }: { mood: Event['mood'] }) => {
@@ -39,7 +40,7 @@ const MoodIcon = ({ mood }: { mood: Event['mood'] }) => {
   return <span className="text-xl mr-2">{emoji}</span>;
 };
 
-const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, onEdit, onDelete, inDialog = false }) => {
   const date = new Date(event.createdAt);
   
   return (
