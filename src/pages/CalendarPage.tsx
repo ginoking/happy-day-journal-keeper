@@ -10,6 +10,7 @@ import { Plus } from 'lucide-react';
 import { useEvents } from '@/contexts/EventContext';
 import { Event } from '@/types';
 import FloatingActionButton from '@/components/UI/FloatingActionButton';
+import { useIsMobile } from '@/hooks/use-mobile';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,6 +29,7 @@ const CalendarPage: React.FC = () => {
   const [eventToDelete, setEventToDelete] = useState<string | null>(null);
   
   const { events, addEvent, updateEvent, deleteEvent, getEventsByDate } = useEvents();
+  const isMobile = useIsMobile();
   
   const selectedDateEvents = getEventsByDate(format(selectedDate, 'yyyy-MM-dd'));
 
@@ -69,7 +71,7 @@ const CalendarPage: React.FC = () => {
 
   return (
     <Layout title="Happy Day Journal">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
         <div className="lg:col-span-8">
           <CalendarView onDateClick={handleDateClick} />
         </div>
@@ -77,19 +79,21 @@ const CalendarPage: React.FC = () => {
         <div className="lg:col-span-4">
           <div className="bg-card rounded-lg shadow-md p-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold truncate">
                 {format(selectedDate, 'PPPP')}
               </h2>
-              <Button onClick={handleAddEvent} size="sm" className="hidden md:flex">
-                <Plus className="h-4 w-4 mr-1" />
-                New Entry
-              </Button>
+              {!isMobile && (
+                <Button onClick={handleAddEvent} size="sm" className="flex">
+                  <Plus className="h-4 w-4 mr-1" />
+                  New Entry
+                </Button>
+              )}
             </div>
             
             <div className="events-container">
               {selectedDateEvents.length === 0 ? (
                 <p className="text-muted-foreground text-center py-8">
-                  No entries for this day. Click the "New Entry" button to add one.
+                  No entries for this day. {isMobile ? 'Press the + button' : 'Click "New Entry"'} to add one.
                 </p>
               ) : (
                 selectedDateEvents.map((event) => (

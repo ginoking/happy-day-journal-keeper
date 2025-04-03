@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { LogOut, User, Lock } from 'lucide-react';
+import { LogOut, User, Lock, Menu } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   DropdownMenu,
@@ -23,8 +23,8 @@ const Header: React.FC<HeaderProps> = ({ title = 'Happy Day Journal' }) => {
 
   return (
     <header className="bg-background/50 backdrop-blur-sm sticky top-0 z-30 border-b">
-      <div className="container flex items-center justify-between h-16">
-        <h1 className="text-xl font-semibold text-primary">
+      <div className="container flex items-center justify-between h-16 px-4 sm:px-6">
+        <h1 className="text-xl font-semibold text-primary truncate">
           {title}
         </h1>
         
@@ -33,8 +33,8 @@ const Header: React.FC<HeaderProps> = ({ title = 'Happy Day Journal' }) => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-2">
-                  <User className="h-4 w-4" />
-                  {user.username}
+                  <User className="h-4 w-4 sm:mr-1" />
+                  <span className="hidden sm:inline">{user.username}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
