@@ -6,12 +6,12 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FloatingActionButtonProps {
-  onClick: () => void;
+  onAddEvent: () => void;
   className?: string;
 }
 
 const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
-  onClick,
+  onAddEvent,
   className
 }) => {
   const isMobile = useIsMobile();
@@ -20,7 +20,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   
   return (
     <Button
-      onClick={onClick}
+      onClick={onAddEvent}
       size="icon"
       className={cn(
         "fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50",

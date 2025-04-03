@@ -135,13 +135,13 @@ const CalendarPage: React.FC = () => {
         )}
       </div>
 
-      <FloatingActionButton onClick={handleFloatingButtonClick} />
+      <FloatingActionButton onAddEvent={handleAddEvent} />
 
       {/* Events List Dialog (mobile only) */}
       <EventsListDialog
         isOpen={isEventsListOpen}
         onClose={() => setIsEventsListOpen(false)}
-        onAddEvent={handleAddEvent}
+        // onAddEvent={handleAddEvent}
         onEditEvent={handleEditEvent}
         onDeleteEvent={handleDeleteEvent}
         date={selectedDate}

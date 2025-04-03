@@ -15,7 +15,7 @@ import EventCard from './EventCard';
 interface EventsListDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddEvent: () => void;
+  // onAddEvent: () => void;
   onEditEvent: (event: Event) => void;
   onDeleteEvent: (id: string) => void;
   date: Date;
@@ -25,7 +25,7 @@ interface EventsListDialogProps {
 const EventsListDialog = ({
   isOpen,
   onClose,
-  onAddEvent,
+  // onAddEvent,
   onEditEvent,
   onDeleteEvent,
   date,
@@ -41,10 +41,10 @@ const EventsListDialog = ({
         </DialogHeader>
         
         <div className="py-4">
-          <Button onClick={onAddEvent} className="mb-4 w-full">
+          {/* <Button onClick={onAddEvent} className="mb-4 w-full">
             <Plus className="h-4 w-4 mr-2" />
             New Entry
-          </Button>
+          </Button> */}
           
           <div className="space-y-3">
             {events.length === 0 ? (
