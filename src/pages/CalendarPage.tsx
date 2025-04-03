@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useEvents } from '@/contexts/EventContext';
 import { Event } from '@/types';
+import FloatingActionButton from '@/components/UI/FloatingActionButton';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -79,7 +80,7 @@ const CalendarPage: React.FC = () => {
               <h2 className="text-xl font-semibold">
                 {format(selectedDate, 'PPPP')}
               </h2>
-              <Button onClick={handleAddEvent} size="sm">
+              <Button onClick={handleAddEvent} size="sm" className="hidden md:flex">
                 <Plus className="h-4 w-4 mr-1" />
                 New Entry
               </Button>
@@ -104,6 +105,8 @@ const CalendarPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FloatingActionButton onClick={handleAddEvent} />
 
       <EventForm
         isOpen={isEventFormOpen}

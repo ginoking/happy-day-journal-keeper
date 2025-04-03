@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { User } from '@/types';
@@ -9,6 +8,7 @@ interface AuthContextType {
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   register: (username: string, email: string, password: string) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -16,7 +16,8 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
   login: async () => {},
   logout: () => {},
-  register: async () => {}
+  register: async () => {},
+  changePassword: async () => {}
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -113,8 +114,39 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    setIsLoading(true);
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // For demo purposes, only allow changing password for demo user
+      // In a real app, we would validate the current password with backend
+      if (user?.username === 'demo' && currentPassword === 'password') {
+        // In a real app, we would update the password in the database
+        toast({
+          title: "Password changed",
+          description: "Your password has been successfully updated.",
+          variant: "default",
+        });
+      } else {
+        throw new Error('Current password is incorrect');
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to change password",
+        description: error instanceof Error ? error.message : "Please check your current password and try again.",
+        variant: "destructive",
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout, register }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, register, changePassword }}>
       {children}
     </AuthContext.Provider>
   );
