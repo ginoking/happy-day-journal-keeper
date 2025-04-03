@@ -13,7 +13,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import ChangePasswordForm from '../Auth/ChangePasswordForm';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  title?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ title = 'Happy Day Journal' }) => {
   const { user, logout } = useAuth();
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
@@ -21,7 +25,7 @@ const Header: React.FC = () => {
     <header className="bg-background/50 backdrop-blur-sm sticky top-0 z-30 border-b">
       <div className="container flex items-center justify-between h-16">
         <h1 className="text-xl font-semibold text-primary">
-          Happy Day Journal
+          {title}
         </h1>
         
         {user && (
